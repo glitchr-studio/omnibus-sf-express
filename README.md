@@ -5,6 +5,13 @@ with their waybills and labels (EXP_RECE_CREATE_ORDER, cloud print), tracking
 (EXP_RECE_SEARCH_ROUTES) and cancellation (EXP_RECE_UPDATE_ORDER) - the open platform's signed
 API. Prices come from configuration (`rates`): SF quotes by contract.
 
+```php
+$gateway = (new SfExpressGatewayFactory($http))->create($options);   // $http: the application's HTTP client - none given, the factory makes its own; the options below
+```
+
+No framework needed: the package requires `glitchr/omnibus` and `symfony/http-client`. In a
+Symfony application, the same through the bundle's configuration:
+
 ```yaml
 omnibus:
     gateways:

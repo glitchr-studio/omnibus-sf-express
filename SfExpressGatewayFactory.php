@@ -3,7 +3,6 @@
 namespace Omnibus\SfExpress;
 
 use Omnibus\Config;
-use Omnibus\Exception\InvalidConfigException;
 use Omnibus\GatewayFactory;
 use Omnibus\SfExpress\Action\CancelAction;
 use Omnibus\SfExpress\Action\ShippingAction;
@@ -31,7 +30,7 @@ final class SfExpressGatewayFactory extends GatewayFactory
             'monthly_card' => null,
             'sandbox' => false,
             'omnibus.api' => function (Config $c) {
-                $http = $this->http ?? (class_exists(HttpClient::class) ? HttpClient::create() : throw new InvalidConfigException('The "sf-express" gateway needs symfony/http-client.'));
+                $http = $this->http ?? HttpClient::create();
 
                 return new Api($http, (string) $c['partner_id'], (string) $c['checkword'], $c['monthly_card'] ?: null, (bool) $c['sandbox']);
             },
